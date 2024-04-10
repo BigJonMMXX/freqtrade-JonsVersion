@@ -19,21 +19,21 @@ Start by downloading and installing Docker / Docker Desktop for your platform:
 
 ## Freqtrade with docker
 
-Freqtrade provides an official Docker image on [Dockerhub](https://hub.docker.com/r/freqtradeorg/freqtrade/), as well as a [docker compose file](https://github.com/freqtrade/freqtrade/blob/stable/docker-compose.yml) ready for usage.
+Freqtrade provides an official Docker image on [Dockerhub](https://hub.docker.com/r/freqtradeorg/freqtrade/), as well as a [compose file](https://github.com/freqtrade/freqtrade/stable/compose.yaml) ready for usage.
 
 !!! Note
     - The following section assumes that `docker` is installed and available to the logged in user.
-    - All below commands use relative directories and will have to be executed from the directory containing the `docker-compose.yml` file.
+    - All below commands use relative directories and will have to be executed from the directory containing the `compose.yaml` file.
 
 ### Docker quick start
 
-Create a new directory and place the [docker-compose file](https://raw.githubusercontent.com/freqtrade/freqtrade/stable/docker-compose.yml) in this directory.
+Create a new directory and place the [compose file](https://raw.githubusercontent.com/freqtrade/freqtrade/stable/compose.yaml) in this directory.
 
 ``` bash
 mkdir ft_userdata
 cd ft_userdata/
 # Download the docker-compose file from the repository
-curl https://raw.githubusercontent.com/freqtrade/freqtrade/stable/docker-compose.yml -o docker-compose.yml
+curl https://raw.githubusercontent.com/freqtrade/freqtrade/stable/compose.yaml -o compose.yaml
 
 # Pull the freqtrade image
 docker compose pull
@@ -57,7 +57,7 @@ The last 2 steps in the snippet create the directory with `user_data`, as well a
 
 1. The configuration is now available as `user_data/config.json`
 2. Copy a custom strategy to the directory `user_data/strategies/`
-3. Add the Strategy' class name to the `docker-compose.yml` file
+3. Add the Strategy' class name to the `compose.yaml` file
 
 The `SampleStrategy` is run by default.
 
@@ -162,7 +162,7 @@ Head over to the [Backtesting Documentation](backtesting.md) to learn more.
 If your strategy requires dependencies not included in the default image - it will be necessary to build the image on your host.
 For this, please create a Dockerfile containing installation steps for the additional dependencies (have a look at [docker/Dockerfile.custom](https://github.com/freqtrade/freqtrade/blob/develop/docker/Dockerfile.custom) for an example).
 
-You'll then also need to modify the `docker-compose.yml` file and uncomment the build step, as well as rename the image to avoid naming collisions.
+You'll then also need to modify the `compose.yaml` file and uncomment the build step, as well as rename the image to avoid naming collisions.
 
 ``` yaml
     image: freqtrade_custom
@@ -175,7 +175,7 @@ You can then run `docker compose build --pull` to build the docker image, and ru
 
 ### Plotting with docker
 
-Commands `freqtrade plot-profit` and `freqtrade plot-dataframe` ([Documentation](plotting.md)) are available by changing the image to `*_plot` in your `docker-compose.yml` file.
+Commands `freqtrade plot-profit` and `freqtrade plot-dataframe` ([Documentation](plotting.md)) are available by changing the image to `*_plot` in your `compose.yaml` file.
 You can then use these commands as follows:
 
 ``` bash
